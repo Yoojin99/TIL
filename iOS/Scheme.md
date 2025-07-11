@@ -69,7 +69,20 @@ Scheme 에 제공한 identifier 는 같은 scheme 을 지정한 다른 앱과 �
 
 다른 앱에서 우리 앱의 custom scheme 을 포함하는 URL 실행할 경우 시스템은 우리 앱을 실행하고 필요한 경우 foreground 로 불러옴. 
 
-### UIKit - AppDelegate
+### SceneDelegate
+
+SceneDelegate 를 사용할 경우 AppDelegate method 는 호출되지 않음
+
+```swift
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    if let url = URLContexts.first?.url {
+        // Handle URL
+        print(url)
+    }
+}
+```
+
+### AppDelegate
 
 시스템은 URL 을 app delegate 의 `application(_:open:options:)` 을 호출해서 앱에 URL 을 전달
 
@@ -112,6 +125,8 @@ ContentView()
         print("url : \(url)")
     }
 ```
+
+SwiftUI 앱에 AppDelegate 를 추가하고 AppDelegate 메서드를 추가했을 때는 AppDelegate 내 메서드 호출이 안됨
 
 * 링크
     * [Defining a custom URL scheme for your app](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)
